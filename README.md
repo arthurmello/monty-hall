@@ -7,7 +7,8 @@ Monty Hall was the original host of a television show called "Let's Make a Deal"
 There are 3 doors. Behind one of them there's a car, and behind 2 of them there's a goat. You have to pick one of the doors
 and your prize will be whaterver's behind it (obviously you want the car).
 
-Once you have picked a door, the host - Monty Hall - chooses, out of the 2 other doors left, one that has a goat behind it.
+Once you have picked a door, the host - Monty Hall - chooses, out of the 2 other doors left, one that has a goat behind it,
+and opens it, revealing the goat to you.
 Then, he gives you the choice between sticking to your previously chosen door, or switching. What do you do?
 
 Here is where this problem has raised a lot of furor: our intution tells us there is no difference between changing
