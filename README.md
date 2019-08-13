@@ -1,6 +1,5 @@
 # Monty Hall Simulator
 
-## Context
 This is a simulation of the famous Monty Hall problem, done in R.
 
 ## Full description
