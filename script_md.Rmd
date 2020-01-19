@@ -1,0 +1,71 @@
+---
+title: "Monty Hall Problem"
+author: "Arthur Mello"
+date: "1/19/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Script description
+
+Monty Hall was the original host of a television show called "Let's Make a Deal". The format is quite simple: There are 3 doors. Behind one of them there's a car, and behind 2 of them there's a goat. You have to pick one of the doors and your prize will be whaterver's behind it (obviously you want the car).
+
+Once you have picked a door, the host - Monty Hall - chooses, out of the 2 other doors left, one that has a goat behind it, and opens it, revealing the goat to you. Then, he gives you the choice between sticking to your previously chosen door, or switching. What do you do?
+
+Here is where this problem has raised a lot of furor: our intution tells us there is no difference between changing doors or sticking to our choice, both hold a 50% of hiding the car. A closer look reveals, however, that it is indeed beneficial to change - it will actually double your chances of winning.
+
+Here is a full description of the problem and its solution: https://en.wikipedia.org/wiki/Monty_Hall_problem.
+
+If you don't believe it, however, this script simulates the game 1000 times and show the winning rates for each strategy: changing doors or sticking to the first door. As expected, results are consistent with the calculations.
+```{r}
+library(rlist)
+
+wins_on_change = 0
+wins_on_stay = 0
+n = 10000 # n is the number of times we want to simulate the game. It is arbitrary, but it should
+        # be high enough to be significant.
+
+for (i in seq(1, n)){
+  doors = c(1,2,3)
+  
+  door_with_prize = sample(x=doors, size=1,
+                           replace=FALSE)
+  
+  # Try1:
+  door_i_choose = sample(x=doors, size=1,
+                         replace=FALSE)
+  doors_left = setdiff(doors, door_i_choose)
+  
+  if (door_i_choose == door_with_prize){
+    
+    door_host_chose = sample(x=doors_left, size=1,
+                             replace=FALSE)
+    
+  } else {
+    
+    door_host_chose = setdiff(doors_left, door_with_prize)
+    doors_left = door_with_prize
+  }
+
+                           
+  # Change:
+  door_i_choose_2 = setdiff(doors_left, door_host_chose)
+  
+  # Answers
+  wc = as.integer(door_i_choose_2==door_with_prize)
+  ws = as.integer(door_i_choose==door_with_prize)
+
+  wins_on_change = wins_on_change + wc
+  wins_on_stay = wins_on_stay + ws                     
+  
+}
+
+cat("Winning rate on 'switching' strategy: ",
+            100*wins_on_change/n,"%", ' \n',
+            "Winning rate on 'staying' strategy: ",
+            100*wins_on_stay/n,"%", sep = "")
+
+```

@@ -8,7 +8,7 @@ library(rlist)
 
 wins_on_change = 0
 wins_on_stay = 0
-n = 1000 # n is the number of times we want to simulate the game. It is arbitrary, but it should
+n = 10000 # n is the number of times we want to simulate the game. It is arbitrary, but it should
         # be high enough to be significant.
 
 for (i in seq(1, n)){
@@ -46,10 +46,9 @@ for (i in seq(1, n)){
   
 }
 
-print(paste("Winning rate on 'changing' strategy: ",
-            100*wins_on_change/n,"%", sep = ""))
-
-print(paste("Winning rate on 'staying' strategy: ",
-            100*wins_on_stay/n,"%", sep = ""))
+cat("Winning rate on 'switching' strategy: ",
+    100*wins_on_change/n,"%", ' \n',
+    "Winning rate on 'staying' strategy: ",
+    100*wins_on_stay/n,"%", sep = "")
 
 
